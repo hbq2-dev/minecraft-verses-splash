@@ -15,7 +15,6 @@ import java.io.IOException
 import java.nio.file.Path
 
 object VersesSplashClient : ClientModInitializer {
-
     private const val MOD_ID: String = "versesClient"
 
     private val LOGGER: Logger = LogManager.getLogger()
@@ -23,7 +22,6 @@ object VersesSplashClient : ClientModInitializer {
     private var configReference: ValueReference<VersesConfig, CommentedConfigurationNode>? = null
 
     override fun onInitializeClient() {
-
         try {
             val configPath: Path =
                 FabricLoader.getInstance().configDir.resolve("$MOD_ID.conf")
@@ -31,7 +29,7 @@ object VersesSplashClient : ClientModInitializer {
                 getOrCreateWatchServiceListener()
                     .listenToConfiguration(
                         { path -> HoconConfigurationLoader.builder().path(path).build() },
-                        configPath
+                        configPath,
                     )
             configReference = rootRef.referenceTo(VersesConfig::class.java)
             rootRef.saveAsync()
@@ -43,40 +41,39 @@ object VersesSplashClient : ClientModInitializer {
     }
 
     @Throws(IOException::class)
-    private fun getOrCreateWatchServiceListener(): WatchServiceListener {
-        return try {
+    private fun getOrCreateWatchServiceListener(): WatchServiceListener =
+        try {
             Confabricate.fileWatcher()
         } catch (ignored: NoClassDefFoundError) {
             createWatchServiceListener()
         } catch (ignored: NoSuchMethodError) {
             createWatchServiceListener()
         }
-    }
 
     @Throws(IOException::class)
     private fun createWatchServiceListener(): WatchServiceListener {
         val listener = WatchServiceListener.create()
 
-        Runtime.getRuntime().addShutdownHook(Thread({
-            try {
-                listener.close()
-            } catch (e: IOException) {
-                LOGGER.catching(e)
-            }
-        }, "Configure shutdown thread (Verses)"))
+        Runtime.getRuntime().addShutdownHook(
+            Thread({
+                try {
+                    listener.close()
+                } catch (e: IOException) {
+                    LOGGER.catching(e)
+                }
+            }, "Configure shutdown thread (Verses)"),
+        )
 
         return listener
     }
 
-    fun getConfig(): VersesConfig {
-        return if (configReference != null) configReference?.get() as VersesConfig else VersesConfig.DEFAULT
-    }
+    fun getConfig(): VersesConfig = if (configReference != null) configReference?.get() as VersesConfig else VersesConfig.DEFAULT
 
     fun createConfigScreen(parent: Screen?): Screen? {
         if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
             return VersesConfigScreenFactory.createConfigScreen(parent, getConfig()) { value: VersesConfig? ->
                 configReference?.setAndSaveAsync(
-                    value
+                    value,
                 )
             }
         }

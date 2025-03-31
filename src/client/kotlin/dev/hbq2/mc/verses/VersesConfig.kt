@@ -30,7 +30,7 @@ class VersesConfig {
         randomizeWords: Boolean,
         percentageRandomized: Int,
         version: String,
-        textColor: Int
+        textColor: Int,
     ) {
         this.isEnabled = enabled
         this.version = version

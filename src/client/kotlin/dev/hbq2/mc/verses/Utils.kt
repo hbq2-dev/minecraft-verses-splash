@@ -6,9 +6,7 @@ import net.minidev.json.JSONObject
 import net.minidev.json.JSONValue
 import java.util.*
 
-
 object Utils {
-
     const val API_URL = "https://bolls.life/get-random-verse"
     const val API_USER_AGENT_HEADER = "User-Agent"
     const val API_USER_AGENT_VALUE = "Mozilla/5.0"
@@ -19,7 +17,10 @@ object Utils {
     private var randomizedWords: MutableList<String> = mutableListOf()
     private val versesConfig = VersesConfig.DEFAULT
 
-    fun wrapLine(line: String, width: Int): String {
+    fun wrapLine(
+        line: String,
+        width: Int,
+    ): String {
         val words = line.trim().split(" ")
         val result = StringBuilder()
         var currentLineLength = 0
@@ -78,7 +79,9 @@ object Utils {
             val bibleBook = bibleBooksArray?.get(bookIndex - 1) as JSONObject
 
             val bookChapterVerse =
-                bibleBook.getAsString("book") + " " + cachedVerseData.chapter + ":" + cachedVerseData.verse + " (" + cachedVerseData.translation + ")"
+                bibleBook.getAsString("book") + " " + cachedVerseData.chapter + ":" + cachedVerseData.verse + " (" +
+                    cachedVerseData.translation +
+                    ")"
             return bookChapterVerse
         } ?: run {
             return null
@@ -110,7 +113,5 @@ object Utils {
     }
 
     @JvmStatic
-    fun String.cleanString(): String {
-        return replace("<[^>]*>".toRegex(), "")
-    }
+    fun String.cleanString(): String = replace("<[^>]*>".toRegex(), "")
 }

@@ -5,7 +5,8 @@ import com.terraformersmc.modmenu.api.ModMenuApi
 import net.minecraft.client.gui.screen.Screen
 
 class VersesModMenuApiImpl : ModMenuApi {
-    override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
-        return ConfigScreenFactory<Screen> { parent: Screen? -> VersesSplashClient.createConfigScreen(parent) }
-    }
+    override fun getModConfigScreenFactory(): ConfigScreenFactory<*> =
+        ConfigScreenFactory<Screen> { parent: Screen? ->
+            VersesSplashClient.createConfigScreen(parent)
+        }
 }

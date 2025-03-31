@@ -1,6 +1,5 @@
 package dev.hbq2.mc.verses
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -27,9 +26,7 @@ data class VerseDataResponse(
     @SerialName("translation")
     val translation: String, // KJV
     @SerialName("verse")
-    val verse: Int // 1
+    val verse: Int, // 1
 )
 
-fun VerseDataResponse.cleanText(): String {
-    return text.replace("<[^>]*>".toRegex(), "")
-}
+fun VerseDataResponse.cleanText(): String = text.replace("<[^>]*>".toRegex(), "")

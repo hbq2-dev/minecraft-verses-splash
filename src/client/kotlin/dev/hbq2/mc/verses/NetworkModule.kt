@@ -11,14 +11,16 @@ import java.net.HttpURLConnection
 import java.net.URI
 
 object NetworkModule {
-
     @OptIn(DelicateCoroutinesApi::class)
     @Throws(IOException::class)
     @JvmStatic
-    fun getVerseAsync(version: String, onResult: ((verseDataResponse: VerseDataResponse) -> Unit)) {
+    fun getVerseAsync(
+        version: String,
+        onResult: ((verseDataResponse: VerseDataResponse) -> Unit),
+    ) {
         GlobalScope.launch {
             val result = StringBuilder()
-            val url = URI.create("${Utils.API_URL}/${version}/").toURL()
+            val url = URI.create("${Utils.API_URL}/$version/").toURL()
             val conn = url.openConnection() as HttpURLConnection
             conn.addRequestProperty(Utils.API_USER_AGENT_HEADER, Utils.API_USER_AGENT_VALUE)
             conn.requestMethod = "GET"
@@ -373,6 +375,6 @@ object NetworkModule {
                 }
               ]
             }
-        """.trimIndent()
+            """.trimIndent()
     }
 }
