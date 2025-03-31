@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "dev.hbq2.mc.verses.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SplashMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

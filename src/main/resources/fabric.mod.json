@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "verses-splash",
+  "version": "${version}",
+  "name": "Verses",
+  "description": "Replaces the default Minecraft splash text with something a bit more meaningful.",
+  "authors": [
+    "HBQ2"
+  ],
+  "contact": {
+    "homepage": "https://hbq2.dev",
+    "sources": "https://github.com/hbq2-dev",
+    "issues": "https://github.com/hbq2-dev/issues"
+  },
+  "license": "GNU GPLv3",
+  "icon": "assets/verses-splash/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      {
+        "value": "dev.hbq2.mc.verses.VersesSplashClient",
+        "adapter": "kotlin"
+      }
+    ],
+    "modmenu": [
+      {
+        "value": "dev.hbq2.mc.verses.VersesModMenuApiImpl",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "verses-splash.mixins.json",
+    {
+      "config": "verses.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.13.0+kotlin.2.1.0"
+  },
+  "suggests": {
+    "cloth-config2": "^${cloth_config_version}",
+    "modmenu": "^${mod_menu_version}"
+  }
+}
