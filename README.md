@@ -1,8 +1,8 @@
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/hbq2)
+
 # Verses Splash
 
 Replaces the default Minecraft splash text with something a bit more meaningful.
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/hbq2)
 
 ### Features:
 
