@@ -10,6 +10,7 @@ Replaces the default Minecraft splash text with something a bit more meaningful.
 - [X] Control the number of randomized words
 - [X] Select between 4 different versions
 - [X] Control text color
+- [X] Rotate text
 - [ ] Verse of the Day functionality - keep same verse throughout the same calendar day
 
 ## Screenshots
