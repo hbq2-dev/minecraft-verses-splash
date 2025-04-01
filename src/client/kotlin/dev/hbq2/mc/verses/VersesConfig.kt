@@ -23,6 +23,9 @@ class VersesConfig {
     var percentageRandomized: Int = 15
         private set
 
+    var textRotation: Int = -20
+        private set
+
     constructor()
 
     constructor(
@@ -31,12 +34,14 @@ class VersesConfig {
         percentageRandomized: Int,
         version: String,
         textColor: Int,
+        textRotation: Int,
     ) {
         this.isEnabled = enabled
         this.version = version
         this.isRandomizeWords = randomizeWords
         this.textColor = textColor
         this.percentageRandomized = percentageRandomized
+        this.textRotation = textRotation
     }
 
     companion object {

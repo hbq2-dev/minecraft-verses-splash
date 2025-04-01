@@ -60,7 +60,7 @@ public class SplashMixin {
 
             context.getMatrices().push();
             context.getMatrices().translate(screenWidth / 2.0f + 123.0f, 69.0f, 0.0f);
-            context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-20.0f));
+            context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(versesConfig.getTextRotation()));
             float f = 1.8f - Math.abs((float) Math.sin((Util.getMeasuringTimeMs() % 1000L) / 1000.0f * (Math.PI * 2f)) * 0.1f);
             f = f * 100.0f / (textRenderer.getWidth(verseText.lines().toList().isEmpty() ? "" : verseText.lines().toList().getFirst()) + 32);
             context.getMatrices().scale(f, f, f);

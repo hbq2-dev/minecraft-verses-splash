@@ -76,10 +76,10 @@ object Utils {
             val bibleBooks = JSONValue.parse(bibleListJsonString()) as JSONObject
             val bibleBooksArray = bibleBooks["books"] as JSONArray?
             val bookIndex: Int = cachedVerseData.book
-            val bibleBook = bibleBooksArray?.get(bookIndex - 1) as JSONObject
+            val bibleBook = bibleBooksArray?.get(bookIndex - 1) as? JSONObject
 
             val bookChapterVerse =
-                bibleBook.getAsString("book") + " " + cachedVerseData.chapter + ":" + cachedVerseData.verse + " (" +
+                bibleBook?.getAsString("book") + " " + cachedVerseData.chapter + ":" + cachedVerseData.verse + " (" +
                     cachedVerseData.translation +
                     ")"
             return bookChapterVerse
@@ -113,5 +113,9 @@ object Utils {
     }
 
     @JvmStatic
-    fun String.cleanString(): String = replace("<[^>]*>".toRegex(), "")
+    fun String.cleanString(): String =
+        replace("<[^>]*>".toRegex(), "")
+            .replace("\\d".toRegex(), "")
+            .replace("\\s{2,}".toRegex(), " ")
+            .trim()
 }

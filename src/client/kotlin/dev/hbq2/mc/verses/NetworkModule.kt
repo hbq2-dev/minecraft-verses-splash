@@ -1,5 +1,6 @@
 package dev.hbq2.mc.verses
 
+import dev.hbq2.mc.verses.Utils.cleanString
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ object NetworkModule {
             val response = Json.decodeFromString<VerseDataResponse>(result.toString())
             Utils.cachedVerseData = response
 
-            println("Got New Verse For Translation: ${response.translation}")
+            println("Got New Verse: ${response.text.cleanString()}")
             onResult.invoke(response)
         }
     }

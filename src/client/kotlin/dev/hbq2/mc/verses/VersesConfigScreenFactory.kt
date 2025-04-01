@@ -61,6 +61,13 @@ object VersesConfigScreenFactory {
                 .setDefaultValue(defaultConfig.version)
                 .build()
 
+        val textRotation: IntegerSliderEntry =
+            entryBuilder
+                .startIntSlider(Text.literal("Rotation"), config.textRotation, -90, 90)
+                .setTooltip(Text.literal("Splash text angle."))
+                .setDefaultValue(defaultConfig.textRotation)
+                .build()
+
         val cachedVerseTitle = entryBuilder.startTextDescription(Text.literal("Cached Verse")).build()
         val cachedVerse = entryBuilder.startTextDescription(Text.literal(Utils.formattedResponse() ?: "")).build()
         val disclaimer = entryBuilder.startTextDescription(Text.literal("API provided by https://bolls.life/")).build()
@@ -71,11 +78,14 @@ object VersesConfigScreenFactory {
         general.addEntry(randomizedWordsPercentage)
         general.addEntry(version)
         general.addEntry(textColor)
+        general.addEntry(textRotation)
         general.addEntry(cachedVerseTitle)
         general.addEntry(cachedVerse)
         general.addEntry(disclaimer)
 
         builder.setSavingRunnable {
+            NetworkModule.getVerseAsync(version = version.value) { }
+
             update.accept(
                 VersesConfig(
                     enabled = enabled.value,
@@ -83,10 +93,10 @@ object VersesConfigScreenFactory {
                     percentageRandomized = randomizedWordsPercentage.value,
                     version = version.value,
                     textColor = textColor.value,
+                    textRotation = textRotation.value,
                 ),
             )
             Utils.cachedFormattedVerse = null
-            NetworkModule.getVerseAsync(version = version.value) { }
         }
 
         return builder.build()
