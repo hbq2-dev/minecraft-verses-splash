@@ -4,7 +4,7 @@ import dev.hbq2.mc.verses.NetworkModule.bibleListJsonString
 import net.minidev.json.JSONArray
 import net.minidev.json.JSONObject
 import net.minidev.json.JSONValue
-import java.util.*
+import kotlin.random.Random
 
 object Utils {
     const val API_URL = "https://bolls.life/get-random-verse"
@@ -76,6 +76,8 @@ object Utils {
             val bibleBooks = JSONValue.parse(bibleListJsonString()) as JSONObject
             val bibleBooksArray = bibleBooks["books"] as JSONArray?
             val bookIndex: Int = cachedVerseData.book
+            println("Book Index: $bookIndex")
+
             val bibleBook = bibleBooksArray?.get(bookIndex - 1) as? JSONObject
 
             val bookChapterVerse =
@@ -97,12 +99,11 @@ object Utils {
     }
 
     fun getRandomWords(totalItems: Int): List<String> {
-        val rand = Random()
         val words = getWords().toMutableList()
 
         val newList: MutableList<String> = ArrayList()
         for (i in 0..<totalItems) {
-            val randomIndex: Int = rand.nextInt(words.size)
+            val randomIndex: Int = Random.nextInt(words.size)
 
             newList.add(words[randomIndex])
 
